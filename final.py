@@ -45,20 +45,51 @@ class LinkedinBot:
 
     def personal_info(self, *args):
         """
-        A method to return all possible fields under personal_info section of the results dictionary
+        A method to return all possible fields under personal_info section of the results dictionary for individual
+        profiles
         :param args: Any number of string parameters which corresponds to personal info fields
         :return: prints out values corresponding to the string parameters in args
         """
+        # Specify a list of fields that appear in results dictionary for personal info section
         possible_info_fields = [
             'name', 'headline', 'company', 'school', 'location', 'summary', 'image', 'followers',
             'email', 'phone', 'connected', 'websites', 'current_company_link'
         ]
+        # Check for the mode of the target information
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for field in args:
                 if field not in possible_info_fields:
-                    print("Possible info include: {}".format(possible_info_fields))
+                    print("No field named {}. Possible fields include: {}".format(field, possible_info_fields))
                 else:
                     print({field: self.results['personal_info'][field]})
         else:
             print("This method is only accessible for scraping individual profiles. "
                   "See the similar method for company profiles: ")
+
+    def get_experiences(self, *args):
+        """
+        A method to return all possible fields under experiences section of the results dictionary for individual
+        profiles
+        :param args: Any number of string parameters which corresponds to experience fields
+        :return: prints out values corresponding to the string parameters in args
+        """
+        # Specify a list of fields that appear in results dictionary for experiences section
+        possible_fields = ['jobs', 'education', 'volunteering']
+
+        # Check for the mode of the target information
+        if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
+            for field in args:
+                if field not in possible_fields:
+                    print("No field named {}. Possible fields include: {}".format(field, possible_info_fields))
+                else:
+                    print({field: self.results['experiences'][field]})
+        else:
+            print("This method is only accessible for scraping individual profiles. "
+                  "See the similar method for company profiles: ")
+
+
+# bot = LinkedinBot(
+#     cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
+#            'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spencernicol', mode='in')
+#
+# bot.get_experiences('jobs')
