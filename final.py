@@ -53,9 +53,12 @@ class LinkedinBot:
             'name', 'headline', 'company', 'school', 'location', 'summary', 'image', 'followers',
             'email', 'phone', 'connected', 'websites', 'current_company_link'
         ]
-        for field in args:
-            if field not in possible_info_fields:
-                print("Possible info include: {}".format(possible_info_fields))
-            else:
-                print({field: self.results['personal_info'][field]})
-
+        if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
+            for field in args:
+                if field not in possible_info_fields:
+                    print("Possible info include: {}".format(possible_info_fields))
+                else:
+                    print({field: self.results['personal_info'][field]})
+        else:
+            print("This method is only accessible for scraping individual profiles. "
+                  "See the similar method for company profiles: ")
