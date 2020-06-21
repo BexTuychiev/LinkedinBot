@@ -42,3 +42,20 @@ class LinkedinBot:
             with ProfileScraper(self.cookie) as scraper:
                 data = scraper.scrape(user=value)
         return data.to_dict()
+
+    def personal_info(self, *args):
+        """
+        A method to return all possible fields under personal_info section of the results dictionary
+        :param args: Any number of string parameters which corresponds to personal info fields
+        :return: prints out values corresponding to the string parameters in args
+        """
+        possible_info_fields = [
+            'name', 'headline', 'company', 'school', 'location', 'summary', 'image', 'followers',
+            'email', 'phone', 'connected', 'websites', 'current_company_link'
+        ]
+        for field in args:
+            if field not in possible_info_fields:
+                print("Possible info include: {}".format(possible_info_fields))
+            else:
+                print({field: self.results['personal_info'][field]})
+
