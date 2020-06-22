@@ -174,6 +174,18 @@ class LinkedinBot:
         else:
             print("This method is only accessible to scrape company profiles.")
 
+    def get_company_insights(self):
+        """
+        A method to retrieve insights section of a company profile
+        :return: prints out insights section a company profile
+        """
+        # Check for the mode of the target information
+        if self.mode.lower() == 'company':
+            for field_name, value in self.results['insights']:
+                print({field_name: value})
+        else:
+            print("This method is only accessible to scrape company profiles.")
+
 
 if __name__ == '__main__':
     bot = LinkedinBot(
