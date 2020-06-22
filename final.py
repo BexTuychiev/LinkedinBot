@@ -87,9 +87,24 @@ class LinkedinBot:
             print("This method is only accessible for scraping individual profiles. "
                   "See the similar method for company profiles: ")
 
+    def get_skills(self):
+        """
+        A method to return all skill names and their number of endorsements under the skills section of results
+         dictionary for individual profiles
+        :return: prints out name of the skill and the number of endorsements
+        """
+        # Check for the mode of the target information
+        if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
+            for skill in self.results['skills']:
+                print(skill['name'] + ': ' + skill['endorsements'])
+        else:
+            print("This method is only accessible for scraping individual profiles. "
+                  "See the similar method for company profiles: ")
 
-# bot = LinkedinBot(
-#     cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
-#            'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spencernicol', mode='in')
-#
-# bot.get_experiences('jobs')
+
+if __name__ == '__main__':
+    bot = LinkedinBot(
+        cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
+               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spencernicol', mode='in')
+
+    bot.get_skills()
