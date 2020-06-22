@@ -121,10 +121,23 @@ class LinkedinBot:
             print("This method is only accessible for scraping individual profiles. "
                   "See the similar method for company profiles: ")
 
+    def get_interests(self):
+        """
+        A method to return all interests listed in the results dictionary of an individual profile
+        :return: Prints out all interests
+        """
+        # Check for the mode of the target information
+        if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
+            for interest in self.results['interests']:
+                print(interest)
+        else:
+            print("This method is only accessible for scraping individual profiles. "
+                  "See the similar method for company profiles: ")
+
 
 if __name__ == '__main__':
     bot = LinkedinBot(
         cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
-               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spencernicol', mode='in')
+               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='garyvaynerchuk', mode='in')
 
-    bot.get_accomplishments('courses')
+    bot.get_interests()
