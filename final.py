@@ -134,10 +134,27 @@ class LinkedinBot:
             print("This method is only accessible for scraping individual profiles. "
                   "See the similar method for company profiles: ")
 
+    def get_overview(self, *args):
+        """
+        A method to retrieve all fields under overview section of results dictionary for company profiles
+        :param args: Any number of string parameters corresponding to field names listed below
+        :return: prints out fields that match given parameters
+        """
+        possible_fields = ['description', 'name', 'company_size', 'website', 'industry', 'headquarters', 'type',
+                           'specialties', 'num_employees', 'image']
+        if self.mode.lower() == 'company':
+            for field in args:
+                if field not in possible_fields:
+                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
+                else:
+                    print({field: self.results['overview'][field]})
+        else:
+            print("This method is only accessible to scrape company profiles.")
+
 
 if __name__ == '__main__':
     bot = LinkedinBot(
         cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
-               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='garyvaynerchuk', mode='in')
+               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spacex', mode='company')
 
-    bot.get_interests()
+    bot.get_overview('name', 'num_employees')
