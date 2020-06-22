@@ -37,7 +37,7 @@ class LinkedinBot:
         """
         if mode == 'company':
             with CompanyScraper(self.cookie) as scraper:
-                data = scraper.scrape(company=value)
+                data = scraper.scrape(company=value, jobs=True, insights=True)
         if mode == 'individual' or mode == 'in':
             with ProfileScraper(self.cookie) as scraper:
                 data = scraper.scrape(user=value)
@@ -148,6 +148,16 @@ class LinkedinBot:
                     print("No field named {}. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['overview'][field]})
+        else:
+            print("This method is only accessible to scrape company profiles.")
+
+    def get_jobs(self):
+        """
+        A method to retrieve job listings belonging to that company profile
+        :return: prints out all the job listings
+        """
+        if self.mode.lower() == 'company':
+            print(self.results['jobs'])
         else:
             print("This method is only accessible to scrape company profiles.")
 
