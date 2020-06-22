@@ -59,7 +59,7 @@ class LinkedinBot:
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for field in args:
                 if field not in possible_fields:
-                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
+                    print("No field named '{}'. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['personal_info'][field]})
         else:
@@ -80,7 +80,7 @@ class LinkedinBot:
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for field in args:
                 if field not in possible_fields:
-                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
+                    print("No field named '{}'. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['experiences'][field]})
         else:
@@ -114,7 +114,7 @@ class LinkedinBot:
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for accomplishment in args:
                 if accomplishment not in possible_fields:
-                    print("No field named {}. Possible fields include: {}".format(accomplishment, possible_fields))
+                    print("No field named '{}'. Possible fields include: {}".format(accomplishment, possible_fields))
                 else:
                     print({accomplishment: self.results['accomplishments'][accomplishment]})
         else:
@@ -146,7 +146,7 @@ class LinkedinBot:
         if self.mode.lower() == 'company':
             for field in args:
                 if field not in possible_fields:
-                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
+                    print("No field named '{}'. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['overview'][field]})
         else:
@@ -181,15 +181,7 @@ class LinkedinBot:
         """
         # Check for the mode of the target information
         if self.mode.lower() == 'company':
-            for field_name, value in self.results['insights']:
+            for field_name, value in self.results['insights'].values():
                 print({field_name: value})
         else:
             print("This method is only accessible to scrape company profiles.")
-
-
-if __name__ == '__main__':
-    bot = LinkedinBot(
-        cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
-               'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spacex', mode='company')
-
-    bot.get_overview('name', 'num_employees')
