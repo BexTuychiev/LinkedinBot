@@ -51,15 +51,15 @@ class LinkedinBot:
         :return: prints out values corresponding to the string parameters in args
         """
         # Specify a list of fields that appear in results dictionary for personal info section
-        possible_info_fields = [
+        possible_fields = [
             'name', 'headline', 'company', 'school', 'location', 'summary', 'image', 'followers',
             'email', 'phone', 'connected', 'websites', 'current_company_link'
         ]
         # Check for the mode of the target information
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for field in args:
-                if field not in possible_info_fields:
-                    print("No field named {}. Possible fields include: {}".format(field, possible_info_fields))
+                if field not in possible_fields:
+                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['personal_info'][field]})
         else:
@@ -80,7 +80,7 @@ class LinkedinBot:
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for field in args:
                 if field not in possible_fields:
-                    print("No field named {}. Possible fields include: {}".format(field, possible_info_fields))
+                    print("No field named {}. Possible fields include: {}".format(field, possible_fields))
                 else:
                     print({field: self.results['experiences'][field]})
         else:
@@ -96,7 +96,27 @@ class LinkedinBot:
         # Check for the mode of the target information
         if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
             for skill in self.results['skills']:
-                print(skill['name'] + ': ' + skill['endorsements'])
+                print(str(skill['name']) + ': ' + str(skill['endorsements']))
+        else:
+            print("This method is only accessible for scraping individual profiles. "
+                  "See the similar method for company profiles: ")
+
+    def get_accomplishments(self, *args):
+        """
+        A method to return all accomplishments listed in the results dictionary of an individual profile
+        :param args: Any number of string parameters corresponding to the achievement names listed below
+        :return: Prints out name of the accomplishment and its type
+        """
+        possible_fields = ['publications', 'certifications', 'patents', 'courses', 'projects', 'honors', 'test_scores',
+                           'languages', 'organizations']
+
+        # Check for the mode of the target information
+        if self.mode.lower() == 'individual' or self.mode.lower() == 'in':
+            for accomplishment in args:
+                if accomplishment not in possible_fields:
+                    print("No field named {}. Possible fields include: {}".format(accomplishment, possible_fields))
+                else:
+                    print({accomplishment: self.results['accomplishments'][accomplishment]})
         else:
             print("This method is only accessible for scraping individual profiles. "
                   "See the similar method for company profiles: ")
@@ -107,4 +127,4 @@ if __name__ == '__main__':
         cookie='AQEDAS_CpVgAZJtdAAABctX1xfEAAAFy-gJJ8U0Aw3faemVsziA2wOqaZZoexUuShwyibcvMf3TuQK5qnTAAiJDpMxfs3B2'
                'z0Fq0l-xdyf9d_0CJOcZ4gvLfL14thtyH2a6EbQXM-Ueh3tEQ00xiuXWA', value='spencernicol', mode='in')
 
-    bot.get_skills()
+    bot.get_accomplishments('courses')
