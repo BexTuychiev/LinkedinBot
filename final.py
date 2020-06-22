@@ -142,6 +142,7 @@ class LinkedinBot:
         """
         possible_fields = ['description', 'name', 'company_size', 'website', 'industry', 'headquarters', 'type',
                            'specialties', 'num_employees', 'image']
+        # Check for the mode of the target information
         if self.mode.lower() == 'company':
             for field in args:
                 if field not in possible_fields:
@@ -156,8 +157,20 @@ class LinkedinBot:
         A method to retrieve job listings belonging to that company profile
         :return: prints out all the job listings
         """
+        # Check for the mode of the target information
         if self.mode.lower() == 'company':
             print(self.results['jobs'])
+        else:
+            print("This method is only accessible to scrape company profiles.")
+
+    def get_life_at_company(self):
+        """
+        A method to retrieve life section of a company profile
+        :return: prints out life at company if available
+        """
+        # Check for the mode of the target information
+        if self.mode.lower() == 'company':
+            print(self.results['life'])
         else:
             print("This method is only accessible to scrape company profiles.")
 
